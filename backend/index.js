@@ -8,7 +8,7 @@ const user_router=require("./routes/user.js")
 app.use(bodyParser.json())
 app.use(cors())
 app.use("/users",users_router)
-app.use("/user"),user_router)
+app.use("/user",user_router)
 const URL="mongodb://localhost:27017/arpan-api"
 const port=8000
 mongoose.connect(URL,{useNewUrlParser: true, useUnifiedTopology: true })
