@@ -1,4 +1,4 @@
-import { FETCH_ALL, CREATE, UPDATE, DELETE} from './index';
+import { AUTH,FETCH_ALL, CREATE, UPDATE, DELETE} from './index';
 
 import * as api from '../../api/index';
 
@@ -40,5 +40,31 @@ export const deleteUser = (id) => async (dispatch) => {
     dispatch({ type: DELETE, payload: id });
   } catch (error) {
     console.log(error.message);
+  }
+};
+
+
+// ---------------------------
+export const signin = (formData, router) => async (dispatch) => {
+  try {
+    const { data } = await api.signIn(formData);
+
+    dispatch({ type: AUTH, data });
+
+    router.push('/');
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const signup = (formData, router) => async (dispatch) => {
+  try {
+    const { data } = await api.signUp(formData);
+
+    dispatch({ type: AUTH, data });
+
+    router.push('/');
+  } catch (error) {
+    console.log(error);
   }
 };

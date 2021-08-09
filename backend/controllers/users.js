@@ -43,7 +43,7 @@ const updateUser = async (req, res) => {
     const { id } = req.params;
     const { name,email,city } = req.body;
     
-    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No users with id: ${id}`);
 
     const updatedUser = { name,email,city , _id: id };
 

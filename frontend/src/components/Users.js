@@ -5,15 +5,15 @@ import { updateUser,deleteUser } from "../redux/actions/allactions"
 const Users = ({ setCurrentId }) => {
   const dispatch = useDispatch()
   const users = useSelector((state) => state.users);
-  
+
   const usersFields = users.length > 0 ? Object.keys(users[0]) : [];
-  
+
   return (
     <div>
       <h1>{!users[0] ? "No Record Found": <table>
         <tbody>
           <tr>
-           
+
 
             <th>Id</th>
             <td>Name</td>
@@ -43,12 +43,12 @@ const Users = ({ setCurrentId }) => {
                 Value="Delete"
                 onClick={() => dispatch(deleteUser(user._id))}
               /><br/>
-            
+
             </tr>
           ))}
         </tbody>
       </table>}</h1>
-       
+
       </div>
   );
 };
