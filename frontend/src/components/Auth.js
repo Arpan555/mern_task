@@ -40,21 +40,23 @@ const SignUp = () => {
             { isSignup && (
             <div>
                 <label>First Name:</label>
-              <input name="firstName"  handleChange={handleChange}/>
+              <input name="firstName"  handleChange={handleChange}/><br/><br/>
               <label>Last Name:</label>
-              <input name="lastName"  handleChange={handleChange} />
+              <input name="lastName"  handleChange={handleChange} /><br/><br/>
             </div>
             )}
             <label>Email:</label>
-            <input name="email"  handleChange={handleChange} type="email" />
+            <input name="email"  handleChange={handleChange} type="email" /><br/><br/>
             <label>Password</label>
-            <input name="password"  handleChange={handleChange} type="password" handleShowPassword={handleShowPassword} />
-            { isSignup && <input name="confirmPassword"  handleChange={handleChange} type="password" /> }
-          <button type="submit" value={ isSignup ? 'Sign Up' : 'Sign In' }/>
-
-            )}
-
-              <button onClick={switchMode} value={ isSignup ? 'Already have an account? Sign in' : "Don't have an account? Sign Up" }/>
+            <input name="password"  handleChange={handleChange} type="password" handleShowPassword={handleShowPassword} /><br/><br/>
+            
+            { isSignup && 
+            <div>
+            <label> ConfirmPassword: </label>
+            <input name="confirmPassword"  handleChange={handleChange} type="password" /> <br/><br/></div>}
+          <input type="button" value={ isSignup ? 'Sign Up' : 'Sign In' }/>
+&nbsp;&nbsp;
+    <input type="button" onClick={switchMode} value={ isSignup ? 'Already have an account? Sign in' : "Don't have an account? Sign Up" }/>
 
 
         </form>
