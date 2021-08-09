@@ -10,13 +10,10 @@ const SignUp = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const [showPassword, setShowPassword] = useState(false);
-  const handleShowPassword = () => setShowPassword(!showPassword);
-
+  
   const switchMode = () => {
     setForm(initialState);
     setIsSignup((prevIsSignup) => !prevIsSignup);
-    setShowPassword(false);
   };
 
   const handleSubmit = (e) => {
@@ -32,11 +29,6 @@ const SignUp = () => {
 
 
 
-  const handleChange =( (e) => {
-  
-  setForm({ ...form, [e.target.name]: e.target.value });
-  console.log(form)
-  })
   return (
         <div>
         <h2>{ isSignup ? 'Sign up' : 'Sign in' }</h2>
@@ -44,20 +36,20 @@ const SignUp = () => {
             { isSignup && (
             <div>
                 <label>First Name:</label>
-              <input name="firstName"  handleChange={handleChange}/><br/><br/>
+              <input name="firstName" value={form.firstName} onChange={(e) => setForm({ ...form, firstName: e.target.value })}/><br/><br/>
               <label>Last Name:</label>
-              <input name="lastName"  handleChange={handleChange} /><br/><br/>
+              <input name="lastName" value={form.lastName} onChange={(e) => setForm({ ...form, lastName: e.target.value })} /><br/><br/>
             </div>
             )}
             <label>Email:</label>
-            <input name="email"  handleChange={handleChange} type="email" /><br/><br/>
+            <input name="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} type="email" /><br/><br/>
             <label>Password</label>
-            <input name="password"  handleChange={handleChange} type="password" handleShowPassword={handleShowPassword} /><br/><br/>
+            <input name="password" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} type="password"  /><br/><br/>
             
             { isSignup && 
             <div>
             <label> ConfirmPassword: </label>
-            <input name="confirmPassword"  handleChange={handleChange} type="password" /> <br/><br/></div>}
+            <input name="confirmPassword" value={form.confirmPassword}  onChange={(e) => setForm({ ...form, confirmPassword: e.target.value })} type="password" /> <br/><br/></div>}
           <input type="submit"  value={ isSignup ? 'Sign Up' : 'Sign In' }/><br/><br/>
           <input type="submit" onClick={switchMode} value={ isSignup ? 'Already have an account? Sign in' : "Don't have an account? Sign Up" }/>
 
