@@ -1,7 +1,7 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const UserModal = require("../models/user.js");
+const userModal = require("../models/userCollect.js");
 
 const secret = 'test';
 
@@ -9,7 +9,7 @@ const signin = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const oldUser = await UserModal.findOne({ email });
+    const oldUser = await userModal.findOne({ email });
 
     if (!oldUser) 
     
@@ -34,7 +34,7 @@ const signin = async (req, res) => {
   const { email, password, firstName, lastName } = req.body;
 
   try {
-    const oldUser = await UserModal.findOne({ email });
+    const oldUser = await userModal.findOne({ email });
 
     if (oldUser) 
     
@@ -42,7 +42,7 @@ const signin = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    const result = await UserModal.create({ email, password: hashedPassword, name: `${firstName} ${lastName}` });
+    const result = await userModal.create({ email, password: hashedPassword, name: `${firstName} ${lastName}` });
 
     const token = jwt.sign( { email: result.email, id: result._id }, secret, { expiresIn: "1h" } );
 

@@ -12,7 +12,7 @@ app.use("/user",user_router)
 const URL="mongodb://localhost:27017/arpan-api"
 const port=8000
 mongoose.connect(URL,{useNewUrlParser: true, useUnifiedTopology: true })
-.then(()=>app.listen(port,()=>console.log(`server runnig on ${port}`)))
+.then(()=>app.listen(port,()=>console.log(`server running on ${port}`)))
 .catch((error)=>console.log(`${error} did not connect`))
 
 mongoose.set('useFindAndModify', false);

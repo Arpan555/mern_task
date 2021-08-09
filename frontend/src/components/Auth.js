@@ -21,18 +21,22 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (isSignup) {
       dispatch(signup(form, history));
+      
     } else {
       dispatch(signin(form, history));
     }
+    
   };
 
 
 
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
-
+  const handleChange =( (e) => {
+  
+  setForm({ ...form, [e.target.name]: e.target.value });
+  console.log(form)
+  })
   return (
         <div>
         <h2>{ isSignup ? 'Sign up' : 'Sign in' }</h2>
@@ -54,12 +58,14 @@ const SignUp = () => {
             <div>
             <label> ConfirmPassword: </label>
             <input name="confirmPassword"  handleChange={handleChange} type="password" /> <br/><br/></div>}
-          <input type="button" value={ isSignup ? 'Sign Up' : 'Sign In' }/>
-&nbsp;&nbsp;
-    <input type="button" onClick={switchMode} value={ isSignup ? 'Already have an account? Sign in' : "Don't have an account? Sign Up" }/>
+          <input type="submit"  value={ isSignup ? 'Sign Up' : 'Sign In' }/><br/><br/>
+          <input type="submit" onClick={switchMode} value={ isSignup ? 'Already have an account? Sign in' : "Don't have an account? Sign Up" }/>
 
+</form>
+    
+   
 
-        </form>
+       
         </div>
       );
 };
