@@ -1,18 +1,19 @@
 const express=require("express")
-const bodyParser= require("body-parser")
-const mongoose = require("mongoose")
-const cors = require("cors")
+const bodyParser=require("body-parser")
+const mongoose=require("mongoose")
+const cors=require("cors")
 const app=express()
-const users_router = require("./routes/users.js")
-const user_router=require("./routes/user.js")
+const reg_router = require("./routes/reg")
+const users_router=require("./routes/users")
 app.use(bodyParser.json())
 app.use(cors())
-app.use("/users",users_router)
-app.use("/user",user_router)
-const URL="mongodb://localhost:27017/arpan-api"
+app.use(reg_router)
+app.use(users_router)
+const URL="mongodb://localhost:27017/pastworking11_merncrud"
 const port=8000
+
 mongoose.connect(URL,{useNewUrlParser: true, useUnifiedTopology: true })
 .then(()=>app.listen(port,()=>console.log(`server running on ${port}`)))
-.catch((error)=>console.log(`${error} did not connect`))
+.catch((error)=>console.log(`${error} didnot connect`))
 
-mongoose.set('useFindAndModify', false);
+mongoose.set("useFindAndModify",false)

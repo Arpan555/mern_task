@@ -1,15 +1,19 @@
-import React from 'react';
+import React,{useEffect} from "react"
+import {useDispatch, useSelector } from "react-redux"
+import { requestgetusers} from "../Thunk";
 import "./style.css"
-import {useDispatch, useSelector } from 'react-redux';
-import { updateUser,deleteUser } from "../redux/actions/allactions"
-const Users = ({ setCurrentId }) => {
-  const dispatch = useDispatch()
-  const users = useSelector((state) => state.users);
-
-  const usersFields = users.length > 0 ? Object.keys(users[0]) : [];
+const Users=()=>{
+    const users = useSelector(state => state.userReducer.users);
+    const dispatch = useDispatch()
+    console.log(users)
+    useEffect(()=>{
+        dispatch(requestgetusers(users))
+    },[dispatch])
+     
+    const usersFields = users.length > 0 ? Object.keys(users[0]) : [];
 
   return (
-    <div>
+    <div><center>        <h1>Users Details</h1><hr/>
       <h1>{!users[0] ? "No Record Found": <table>
         <tbody>
           <tr>
@@ -34,23 +38,23 @@ const Users = ({ setCurrentId }) => {
                <input
                 type="button"
                 Value="Edit"
-                onClick={() => setCurrentId(user._id)}
+                // onClick={() => setCurrentId(user._id)}
               />
-              {console.log(user._id)}
               <br/>
               <input
                 type="button"
                 Value="Delete"
-                onClick={() => dispatch(deleteUser(user._id))}
+                // onClick={() => dispatch(deleteUser(user._id))}
               /><br/>
 
             </tr>
           ))}
         </tbody>
       </table>}</h1>
+      </center>
 
       </div>
   );
 };
 
-export default Users;
+export default Users

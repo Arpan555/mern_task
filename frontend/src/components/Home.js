@@ -1,25 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { getUsers } from '../redux/actions/allactions';
-import Users from './Users';
-import AddForm from './AddForm';
+import React from 'react'
 
 const Home = () => {
-  const [currentId, setCurrentId] = useState(0);
-  const dispatch = useDispatch();
-  
-  useEffect(() => {
-    dispatch(getUsers());
-  }, [currentId, dispatch]);
+    return (
+        <div>
+            <h1>Home</h1>
+        </div>
+    )
+}
 
-  return (
-    <div>
-        <AddForm currentId={currentId} setCurrentId={setCurrentId}/>
-        <h3>User Details</h3>
-        <Users setCurrentId={setCurrentId}/>
-            
-      </div>
-  );
-};
-
-export default Home;
+export default Home

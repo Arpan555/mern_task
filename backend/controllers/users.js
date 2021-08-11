@@ -1,64 +1,30 @@
-const express=require("express")
-const mongoose=require("mongoose")
-const usersCollect=require("../models/usersCollect.js")
-const router=express.Router()
-
- const getUsers= async (req,res)=>{
-   try {
-       const allUser=await usersCollect.find()
-       res.status(200).json(allUser)
-       
-   } catch (error) {
-       res.status(404).json({message:error.message})
-       
-   }
-}
-
- const getUser = async (req, res) => { 
-    const { id } = req.params;
-
+const usersCollect =require("../models/usersCollect")
+const createUser = async (req, res) => {
+    const {name, email, city } = req.body;
+    const addData= new usersCollect({name,email,city})
     try {
-        const user = await usersCollect.findById(id);
+        // console.log(addData)
+        await addData.save()
+        // console.log(addData)
+        res.status(201).json(addData)
         
-        res.status(200).json(user);
-    } catch (error) {
-        res.status(404).json({ message: error.message });
-    }
+} catch (error) {
+    res.send(409).json({message:error.message})
+        }
+
 }
 
- const createUser = async (req, res) => {
-    const { name,email,city } = req.body;
-
-    const newUser = new usersCollect({name,email,city})
-
+const getUsers =async (req,res)=>{
     try {
-        await newUser.save();
-
-        res.status(201).json(newUser );
+        const allData= await usersCollect.find({})
+        console.log("allDATA",allData)
+        res.status(200).json(allData)
     } catch (error) {
-        res.status(409).json({ message: error.message });
-    }
-}
-const updateUser = async (req, res) => {
-    const { id } = req.params;
-    const { name,email,city } = req.body;
-    
-    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No users with id: ${id}`);
+        res.status(404).json({message:error.message})
+        }
 
-    const updatedUser = { name,email,city , _id: id };
+}  
+      
+module.exports={createUser,getUsers}
 
-    await usersCollect.findByIdAndUpdate(id, updatedUser, { new: true });
 
-    res.json(updatedUser);
-}
-
- const deleteUser = async (req, res) => {
-    const { id } = req.params;
-
-    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
-
-    await usersCollect.findByIdAndRemove(id);
-
-    res.json({ message: "Post deleted successfully." });
-}
-module.exports={router,getUsers,getUser,createUser,deleteUser,updateUser,}
