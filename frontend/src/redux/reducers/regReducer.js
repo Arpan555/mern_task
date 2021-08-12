@@ -22,7 +22,7 @@ export default function register(state=initialState,action){
         return{
                 ...state,
                 regiData:{...state.regiData , ...action.payload},
-                token:action.payload.token
+                
             }
         
         default:

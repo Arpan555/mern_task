@@ -12,9 +12,9 @@ import Users from "./Users";
 import SignIn from "./SignIn";
 import PageNotFound from "./PageNotFound";
 import SignUp from "./SignUp"
-
+import EditForm from "./EditForm"
 const PrivateRoute = (props) => {
-  const { token } = useSelector((state)=>state.regReducer.token)
+  const { token } = useSelector((state)=>state.regReducer)
   console.log("authLogin", token);
 
   return token ? (
@@ -29,7 +29,7 @@ const PrivateRoute = (props) => {
 };
 
 function Routes() {
-    const { token } = useSelector((state)=>state.regReducer.token)
+    const { token } = useSelector((state)=>state.regReducer)
   
   
   return (
@@ -44,15 +44,15 @@ function Routes() {
           </li>
         )}
         <li>
-          <Link to="/Users">Users</Link>
+          <Link to="/users">Users</Link>
         </li>
-        <li>
-          <Link to="/addform">AddForm</Link>
-        </li>
+        
       </ul>
       <Switch>
         <PrivateRoute path="/users" component={Users} />
         <PrivateRoute path="/addform" component={AddForm} />
+        <PrivateRoute path="/editform" component={EditForm} />
+        
         <Route path="/signin" component={SignIn} />
         <Route path="/signup"component={SignUp}/>
         <Route path="/">Home</Route>

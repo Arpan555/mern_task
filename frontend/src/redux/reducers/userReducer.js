@@ -1,4 +1,4 @@
-import {CREATE, FETCH_ALL} from "../actions/index"
+import {CREATE, FETCH_ALL,DELETE,UPDATE} from "../actions/index"
 const initialState={
     users:[],
     token: localStorage.getItem("token"),
@@ -20,9 +20,17 @@ export default function usersreducer(state=initialState,action){
 
 
         }
+    case DELETE:
+        return {...state,
+        users:  state.users.filter((user) => user._id !== action.payload)
+    }
+    case UPDATE:
+        return{
+            ...state,
+            users: state.users.map((user) => (user._id === action.payload._id ? action.payload : user))
+        }
+        
     default:
         return state
 }
-
-
 }

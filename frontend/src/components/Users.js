@@ -1,11 +1,15 @@
 import React,{useEffect} from "react"
 import {useDispatch, useSelector } from "react-redux"
-import { requestgetusers} from "../Thunk";
+import { requestgetusers,requestdeleteuser,requestupdateuser} from "../Thunk";
+import {useHistory} from "react-router-dom"
 import "./style.css"
 const Users=()=>{
+    const {token}= useSelector(state =>state.userReducer.token)
     const users = useSelector(state => state.userReducer.users);
+    // console.log(token)
+    const history=useHistory()
     const dispatch = useDispatch()
-    console.log(users)
+    // console.log(users)
     useEffect(()=>{
         dispatch(requestgetusers(users))
     },[dispatch])
@@ -13,7 +17,10 @@ const Users=()=>{
     const usersFields = users.length > 0 ? Object.keys(users[0]) : [];
 
   return (
-    <div><center>        <h1>Users Details</h1><hr/>
+    <div><center>
+      <input type="button" onClick={()=> {history.push("/addform")}} value="Add User" />
+      
+      <h1>Users Details</h1><hr/>
       <h1>{!users[0] ? "No Record Found": <table>
         <tbody>
           <tr>
@@ -38,13 +45,13 @@ const Users=()=>{
                <input
                 type="button"
                 Value="Edit"
-                // onClick={() => setCurrentId(user._id)}
+                   onClick={() =>  history.push('/editform') } 
               />
               <br/>
               <input
                 type="button"
                 Value="Delete"
-                // onClick={() => dispatch(deleteUser(user._id))}
+                  onClick={() => dispatch(requestdeleteuser(user._id))}
               /><br/>
 
             </tr>

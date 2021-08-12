@@ -1,6 +1,6 @@
 import axios from "axios"
 import {signup,signin} from "./redux/actions/allActions"
-import { createuser,getusers } from "./redux/actions/userActions"
+import { createuser,getusers ,deleteuser,updateuser} from "./redux/actions/userActions"
 const request=axios.create({
     baseURL:"http://localhost:8000",
 })
@@ -30,6 +30,36 @@ export const requestgetusers=(state)=>{
         }
     }
 }
+
+export const requestdeleteuser=(id)=>{
+    return async(dispatch)=>{
+        try {
+            console.log(id)
+            const deleteData= await request.delete(`/delete/${id}`)
+            console.log(deleteData)
+            dispatch(deleteuser(id))
+        } catch (error) {
+            console.log(error)
+            
+        }
+    }
+}
+
+export const requestupdateuser=(id,data)=>{
+    return async(dispatch)=>{
+        try {
+            console.log(id,data)
+            const {updateData} = await request.patch(`/edit/${id}`,data)
+            console.log(updateData)
+            dispatch(updateuser(updateData))
+        } catch (error) {
+            console.log(error)
+            
+        }
+    }
+}
+
+
 
 export const requestsignup=(state)=>{
     return async(dispatch)=>{
