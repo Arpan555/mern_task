@@ -20,13 +20,7 @@ const PrivateRoute = (props) => {
   return token ? (
     <Route {...props} />
   ) : (
-    <Redirect
-      to={{
-        pathname: "/signin"
-      }}
-    />
-  );
-};
+    <Redirect to={{pathname: "/signin"}}/>) }
 
 function Routes() {
     const { token } = useSelector((state)=>state.regReducer)
@@ -52,6 +46,7 @@ function Routes() {
         <PrivateRoute path="/users" component={Users} />
         <PrivateRoute path="/addform" component={AddForm} />
         <PrivateRoute path="/editform" component={EditForm} />
+        {/* <PrivateRoute path="/logout" component={Logout} /> */}
         
         <Route path="/signin" component={SignIn} />
         <Route path="/signup"component={SignUp}/>

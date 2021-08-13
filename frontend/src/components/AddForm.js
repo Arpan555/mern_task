@@ -18,7 +18,7 @@ const AddForm=()=>{
     
     const handleSubmit= (e)=>{
         e.preventDefault();
-        dispatch(requestcreateuser(userData));
+        dispatch(requestcreateuser(userData));//(user_id,userdata)
         console.log(userData.name,userData.email,userData.city)
         history.push("/users");
             

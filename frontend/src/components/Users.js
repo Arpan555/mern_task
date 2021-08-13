@@ -1,8 +1,9 @@
 import React,{useEffect} from "react"
 import {useDispatch, useSelector } from "react-redux"
-import { requestgetusers,requestdeleteuser,requestupdateuser} from "../Thunk";
+import { requestgetusers,requestdeleteuser} from "../Thunk";
 import {useHistory} from "react-router-dom"
 import "./style.css"
+import { setuser } from "../redux/actions/userActions";
 const Users=()=>{
     const {token}= useSelector(state =>state.userReducer.token)
     const users = useSelector(state => state.userReducer.users);
@@ -13,12 +14,18 @@ const Users=()=>{
     useEffect(()=>{
         dispatch(requestgetusers(users))
     },[dispatch])
-     
+    
+  const remove=()=>{
+      localStorage.removeItem("token")
+      history.push("/")
+      } 
+
     const usersFields = users.length > 0 ? Object.keys(users[0]) : [];
 
   return (
     <div><center>
-      <input type="button" onClick={()=> {history.push("/addform")}} value="Add User" />
+      <input type="button" onClick={()=> {history.push("/addform")}} value="Add User" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="button" value="Logout" onClick={remove}/>
       
       <h1>Users Details</h1><hr/>
       <h1>{!users[0] ? "No Record Found": <table>
@@ -45,7 +52,8 @@ const Users=()=>{
                <input
                 type="button"
                 Value="Edit"
-                   onClick={() =>  history.push('/editform') } 
+                   onClick={() => {dispatch(setuser(user)) 
+                     history.push("/editform")} } 
               />
               <br/>
               <input

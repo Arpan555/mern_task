@@ -18,9 +18,7 @@ const SignIn = () => {
         e.preventDefault()
         console.log(signinForm.email,signinForm.password)
         dispatch(requestsignin(signinForm));
-        history.push("/users")
-        setSigninForm({email: '', password: ''})
-
+        history.push("/")
        }
   return (
     <div>

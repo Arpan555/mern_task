@@ -1,4 +1,4 @@
-import{FETCH_ALL,CREATE,DELETE} from "./index"
+import{FETCH_ALL,CREATE,DELETE, SET_USER} from "./index"
 
 export const createuser=(payload)=>({
   type:CREATE,
@@ -18,4 +18,9 @@ export const updateuser=(id,data)=>({
   type:DELETE,
   payload:data,
   id:id
+})
+
+export const setuser=(data)=>({
+  type: SET_USER,
+  payload:data
 })

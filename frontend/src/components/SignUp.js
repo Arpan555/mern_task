@@ -21,8 +21,6 @@ const SignUp = () => {
         
         dispatch(requestsignup(signupForm));
         history.push("/signin")
-        setSignupForm({ name: '', email: '', password: ''})
-
        }
     return (
         <div>

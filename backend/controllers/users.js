@@ -45,12 +45,12 @@ const updateUser =async (req,res)=>{
     const updateData={name,email,city,_id:id}
     console.log("update",name,email,city,id)
     try {
-        const updatedData=await usersCollect.findByIdAndUpdate(id,updateData)
+        const updatedData=await usersCollect.findByIdAndUpdate(id,updateData,{new:true})
         res.status(200).json(updatedData)
         console.log("123")
         
     } catch (error) {
-        console.log(error)
+        // console.log(error)
         res.status(404).json({message:error.message})
         
     }

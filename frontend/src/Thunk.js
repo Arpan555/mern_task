@@ -5,24 +5,22 @@ const request=axios.create({
     baseURL:"http://localhost:8000",
 })
 
-export const requestcreateuser=(state)=>{
+export const requestcreateuser=(state)=>{//id,data
     return async(dispatch)=>{
         try {
             const newData=await request.post("/adduser",state)
             dispatch(createuser(newData.data))
+            dispatch(getusers)
         } catch (error) {
             console.log(error)
             
         }
     }
 }
-
 export const requestgetusers=(state)=>{
     return async(dispatch)=>{
         try {
-            console.log(state)
             const usersData=await request.get("/users",state)
-            console.log(usersData)
             dispatch(getusers(usersData.data))
         } catch (error) {
             console.log(error)
@@ -34,10 +32,11 @@ export const requestgetusers=(state)=>{
 export const requestdeleteuser=(id)=>{
     return async(dispatch)=>{
         try {
-            console.log(id)
+            // console.log(id)
             const deleteData= await request.delete(`/delete/${id}`)
-            console.log(deleteData)
+            // console.log(deleteData)
             dispatch(deleteuser(id))
+            dispatch(getusers)
         } catch (error) {
             console.log(error)
             
@@ -50,7 +49,6 @@ export const requestupdateuser=(id,data)=>{
         try {
             console.log(id,data)
             const {updateData} = await request.patch(`/edit/${id}`,data)
-            console.log(updateData)
             dispatch(updateuser(updateData))
         } catch (error) {
             console.log(error)
