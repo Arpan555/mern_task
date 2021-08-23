@@ -45,7 +45,7 @@ const Users=()=>{
             <td>Email</td>
             <td>City</td>
             <td>__v</td>
-            <td>action</td>
+            <td>Action</td>
           </tr>
           {users.map((user) => (
             <tr key={user.id}>

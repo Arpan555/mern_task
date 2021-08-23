@@ -3,7 +3,7 @@ import { useDispatch,useSelector } from 'react-redux'
 import {requestgettasks,requestgetfiltereddata,requestsearchtask} from "../Thunk"
 import { useHistory } from 'react-router'
 const ShowTasks = () => {
-    const name=useSelector(state=>state.regReducer.name)
+    // const name=useSelector(state=>state.regReducer.name)
     const allTasks= useSelector(state =>state.regReducer.tasks)
     const dispatch = useDispatch()
     const history=useHistory()
@@ -62,7 +62,7 @@ const ShowTasks = () => {
                 <label htmlFor="html">Search</label>
                 <input type="text" name="search" placeholder="Search..." autoComplete="off" onChange={e => handleChange(e.target.value)} value={text}  />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <br/>
-                {text ? 
+                {text && suggetion.length>0 ? 
                 <table>
                     <tbody>
                       <tr>
@@ -74,7 +74,7 @@ const ShowTasks = () => {
                         <th>User</th>
                         <th>__V</th>
                       </tr>
-                      {suggetion && suggetion.map((suggetions, i) => 
+                      {suggetion.map((suggetions, i) => 
                         <tr key={i}>
                           <td>{suggetions._id}</td>
                           <td>{suggetions.title}</td>

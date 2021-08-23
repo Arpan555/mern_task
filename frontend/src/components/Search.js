@@ -25,7 +25,6 @@ const Search = () => {
         setSuggetion(matches)
         setText(text);
     }
-    
 
     return (
         <div><center>
@@ -35,9 +34,9 @@ const Search = () => {
                  onChange={e => handleChange(e.target.value)} value={text} ></input>
                 </lable>
             </form>
-            {suggetion && suggetion.map((suggetions, i) => 
-            <div key={i} >{suggetions.name} {suggetions.email}</div>
-            )}
+    
+        {suggetion && suggetion.map((suggetions, i) =>
+       <div key={i} >{suggetions.name}</div> )}
             </center>
         </div> 
     )
